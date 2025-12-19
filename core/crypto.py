@@ -1,13 +1,19 @@
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
+
+from core.kdf import derive_key
+
 import os
 import json
 
 
 #krypteringen
-def encrypt(input_file, output_file, keyfile):
-    key = get_random_bytes(16)
+def encrypt(input_file, output_file, password):
+    #key = get_random_bytes(16)
     iv = get_random_bytes(16)
+    salt = get_random_bytes(16)
+    key = derive_key(password, salt)
+
 
     with open(input_file, 'rb') as f:
         data = f.read()
@@ -19,30 +25,31 @@ def encrypt(input_file, output_file, keyfile):
     encrypted = cipher.encrypt(data)
 
     with open(output_file, 'wb') as f:
-        f.write(iv + encrypted)
+        f.write(encrypted)
 
-    with open(keyfile, 'w') as f:
+    with open(output_file + ".meta", 'w') as f:
         json.dump({
-            'key': key.hex(),
+            'salt': salt.hex(),
             'iv': iv.hex()
         }, f)
 
     print(f'Encryptet and saved as: {output_file}')
-    print(f'Key and IV stored as: {keyfile}')
 
 
 
 
 #dekrypteringen
-def decrypt(input_file, output_file, keyfile):
-    with open(keyfile, 'r') as f:
+def decrypt(input_file, output_file, password):
+    with open(input_file, 'r') as f:
         keydata = json.load(f)
 
-    key = bytes.fromhex(keydata['key'])
+    #key = bytes.fromhex(keydata['key'])
+    salt = bytes.fromhex(keydata['salt'])
+    key = derive_key(password, salt)
     iv = bytes.fromhex(keydata['iv'])
 
     with open(input_file, 'rb') as f:
-        file_iv = f.read(16)
+        #file_iv = f.read(16)
         encrypted = f.read()
 
     cipher = AES.new(key, AES.MODE_CBC, iv)

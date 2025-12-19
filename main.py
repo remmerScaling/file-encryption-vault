@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox,
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
 from GUI.aes_gui_ui import Ui_MainWindow
-from aes_tool import encrypt, decrypt
+from core.crypto import encrypt, decrypt
 import os
 import sys
 from PyQt5.QtGui import QCursor

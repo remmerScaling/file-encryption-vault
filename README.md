@@ -4,6 +4,8 @@ Projektet er simpelt, men meget arbejde blev brugt på arkitektonisk overvejelse
 - primært udviklet som et læringsprojekt
 - sekundært udviklet fordi jeg er doven og magter ikke bruge min tid på at finde glemte adgangskoder
 
+GUI'en er bevidst holdt relativt simpelt, med fokus på funktionalitet og klar adskillelse fra kryptografisk logik.
+
 Formål: 
 - Implementere korrekt AES-baseret kryptering og dekryptering
 - implementere en intuitiv brugergrænseflade
@@ -23,3 +25,4 @@ Følgende funktionalitet er planlagt, men midlertidigt latt på hylden
 - Import af hele mapper (rekursiv indlæsning af filstruktur)
 - Bevarelse af mappestruktur inde i vaulten
 - Selektiv eksport af filer eller mapper fra vault
+- komponentbaseret GUI

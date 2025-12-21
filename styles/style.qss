@@ -1,45 +1,81 @@
-QMainWindow {
-    background-color: rgb(0, 79, 5);
+/* =========================
+   GLOBAL GLASS SURFACE
+   ========================= */
+QWidget {
+    background-color: rgba(6, 12, 18, 170);
+    color: #b8f6ff;
+    font-family: "Segoe UI";
+    font-size: 13px;
 }
 
-QWidget#centralwidget {
-    background-color: rgb(0, 255, 30);
+/* =========================
+   STATUS / HEADER TEXT
+   ========================= */
+QLabel {
+    background: transparent;
+    color: #9defff;
+    font-size: 15px;
+    letter-spacing: 1px;
 }
 
-QWidget#widget {
-    background-color: rgb(9, 9, 9);
-    border-radius: 15px;
+
+QListWidget {
+    background-color: rgba(8, 18, 28, 140);
+    border: 1px solid rgba(120, 220, 255, 120);
+    border-radius: 10px;
+    padding: 6px;
 }
+
+QListWidget::item {
+    padding: 6px;
+    color: #d8f8ff;
+}
+
+QListWidget::item:selected {
+    background-color: rgba(0, 200, 255, 150);
+    color: #00131a;
+}
+
 
 QPushButton {
-    color: #ffffff;
-    background-color: #1a1a1a;
-    border: 2px solid #39ff14;
+    background-color: rgba(0, 110, 150, 140);
+    color: #e6fbff;
+    border: 1px solid rgba(0, 230, 255, 200);
     border-radius: 10px;
-    padding: 8px 15px;
-    font-size: 14px;
+    padding: 8px;
 }
 
 QPushButton:hover {
-    background-color: #262626;
-    border-color: #70ff58;
+    background-color: rgba(0, 180, 230, 190);
+    border-color: rgba(160, 255, 255, 255);
 }
 
 QPushButton:pressed {
-    background-color: #0f0f0f;
-    border-color: #20c700;
-    color:  #20c700;
+    background-color: rgba(0, 80, 120, 220);
+    border-color: rgba(0, 255, 220, 255);
+    color: #00ffd0;
 }
 
-QLineEdit {
-    background-color: #111111;
-    color: #ffffff;
-    border: 2px solid #39ff14;
-    border-radius: 8px;
-    padding: 4px;
+QPushButton:disabled {
+    background-color: rgba(40, 40, 40, 120);
+    border-color: rgba(80, 80, 80, 120);
+    color: #666;
 }
 
-QLabel {
-    color: #39ff14;
-    font-size: 14px;
+/* =========================
+   SCROLLBAR (MINIMAL HUD)
+   ========================= */
+QScrollBar:vertical {
+    background: transparent;
+    width: 8px;
+}
+
+QScrollBar::handle:vertical {
+    background: rgba(0, 200, 255, 160);
+    border-radius: 4px;
+}
+
+QScrollBar::add-line,
+QScrollBar::sub-line {
+    background: none;
 }

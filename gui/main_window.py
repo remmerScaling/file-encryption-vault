@@ -2,7 +2,8 @@ import sys
 import os
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter, QColor, QLinearGradient, QPen, QFont
+from PyQt5.QtGui import QPainter, QColor, QLinearGradient, QPen, QFont, QIcon
+
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QPushButton, QLabel,
     QFileDialog, QMessageBox, QListWidget, QSizePolicy, QDialog,
@@ -14,6 +15,13 @@ from password_window import PasswordDialog
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from core.vault_session import VaultSession
 
+
+def resource_path(rel_path: str) -> str:
+    base = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
+
+    return os.path.join(base, rel_path)
+
+icon_path = resource_path("app_icon.ico")
 
 class GlassBackground(QWidget):
     def __init__(self, parent=None):
@@ -112,6 +120,9 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
 
+        self.setWindowTitle("Crypto Vault")
+        self.setWindowIcon(QIcon(icon_path)) 
+
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.Window)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
@@ -134,7 +145,7 @@ class MainWindow(QWidget):
         layout.setContentsMargins(24,24,24,24)
         layout.setSpacing(12)
 
-        self.title = QLabel("Secret Shit App", alignment=Qt.AlignCenter)
+        self.title = QLabel("Crypto Vault", alignment=Qt.AlignCenter)
         self.status = QLabel("No vault open", alignment=Qt.AlignCenter)
 
         self.list = VaultList(self.content)
@@ -372,11 +383,17 @@ class MainWindow(QWidget):
 
 
 def run():
+    import ctypes
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
+        "CryptoVault.App"
+    )
+
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon(icon_path))  
+
     w = MainWindow()
     w.show()
     sys.exit(app.exec_())
-
 
 if __name__ == "__main__":
     run()
